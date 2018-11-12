@@ -1,0 +1,4 @@
+rootProject.name = 'toylocal'
+
+include 'toylocal-server'
+include 'toylocal-oauth'

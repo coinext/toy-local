@@ -1,0 +1,20 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+  tomcat:
+    accesslog:
+      enabled: true
+      directory: /opt/logs
+
+spring:
+  profiles:
+    active: local
+
+management:
+  endpoints:
+    web:
+      base-path: /_/
+  health:
+    db:
+      enabled: false
