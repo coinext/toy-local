@@ -2,3 +2,4 @@ rootProject.name = 'toylocal'
 
 include 'toylocal-server'
 include 'toylocal-oauth'
+include 'toylocal-service'
