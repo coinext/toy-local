@@ -1,0 +1,2 @@
+INSERT INTO user (id, email, password, name, enabled) VALUES (1, 'user_a@mail.com', 'password', '사용자A', 1);
+INSERT INTO user (id, email, password, name, enabled) VALUES (2, 'user_b@mail.com', 'password', '사용자B', 1);

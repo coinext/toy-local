@@ -1,6 +1,10 @@
-apply plugin: 'war'
+jar {
+    enabled = true
+}
 
 dependencies {
+    compile project(":toylocal-service")
+
     compile "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
 
     runtime "com.h2database:h2"
