@@ -1,4 +1,4 @@
-package com.exam.toylocal.user;
+package com.exam.toylocal.domain.user;
 
 import com.exam.toylocal.base.DataResponse;
 import com.exam.toylocal.domain.user.User;
@@ -23,7 +23,7 @@ public class UserController {
 
     @GetMapping("/{userId}")
     public DataResponse<User> get(@PathVariable Long userId) {
-        User user = userService.get(userId);
+        User user = userService.get(userId).orElseThrow(null);
         return new DataResponse<>(user);
     }
 }

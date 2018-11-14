@@ -11,6 +11,13 @@ spring:
   profiles:
     active: local
 
+security:
+  oauth2:
+    client:
+      - client-id: toylocal-id
+        client-secret: $2a$10$kSQbg7BopGKgu92aSAuJNesLdrvtX0FGsjZzg1vkUCOLI/Ds/va6u #toylocal-secret
+        authorized-grant-types: password
+
 management:
   endpoints:
     web:
@@ -18,3 +25,5 @@ management:
   health:
     db:
       enabled: false
+
+check-user-scopes: false

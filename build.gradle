@@ -3,6 +3,10 @@ buildscript {
         springBootVersion = "2.1.0.RELEASE"
         lombokVersion = "1.18.2"
         jacksonDatabindVersion = "2.9.7"
+        springSecurityOauth2 = "2.2.1.RELEASE"
+        springSecurityJwtVersion = "1.0.9.RELEASE"
+        mysqlConnectorVersion = "8.0.13"
+        commonsioVersion = "2.6"
     }
     repositories {
         mavenCentral()
@@ -18,7 +22,6 @@ repositories {
 
 allprojects {
     group = "com.exam"
-    version = "0.0.1-SNAPSHOT"
 
     apply plugin: "java"
     apply plugin: "idea"

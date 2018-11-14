@@ -1,5 +1,6 @@
 package com.exam.toylocal;
 
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -8,9 +9,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 12/11/2018
  */
 @SpringBootApplication
-public class ToylocalApplication {
+public class OAuthApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ToylocalApplication.class, args);
+        SpringApplication.run(OAuthApplication.class, args);
     }
 }

@@ -35,7 +35,7 @@ public class User {
 
     @Column(nullable = false)
     @JsonIgnore
-    @Getter(AccessLevel.NONE)
+//    @Getter(AccessLevel.NONE)
     private String password;    // 패스워드
 
     @Column(nullable = false)

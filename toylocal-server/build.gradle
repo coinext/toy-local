@@ -1,11 +1,12 @@
-jar {
-    enabled = true
-}
 
 dependencies {
     compile project(":toylocal-service")
 
     compile "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
 
-    runtime "com.h2database:h2"
+    compile "org.springframework.security.oauth:spring-security-oauth2:${springSecurityOauth2}"
+    compile "org.springframework.security:spring-security-jwt:${springSecurityJwtVersion}"
+
+    compile "mysql:mysql-connector-java:${mysqlConnectorVersion}"
+    compile "commons-io:commons-io:${commonsioVersion}"
 }
