@@ -1,4 +1,4 @@
-package com.exam.toylocal.base;
+package com.exam.toylocal.domain.common;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

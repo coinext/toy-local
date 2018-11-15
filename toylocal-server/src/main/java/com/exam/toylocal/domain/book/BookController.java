@@ -1,7 +1,8 @@
 package com.exam.toylocal.domain.book;
 
-import com.exam.toylocal.base.DataResponse;
+import com.exam.toylocal.domain.common.DataResponse;
 import com.exam.toylocal.domain.book.kakao.KakaoBookService;
+import com.exam.toylocal.domain.common.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +24,10 @@ public class BookController {
     private KakaoBookService bookService;
 
     @GetMapping("/search")
-    public DataResponse<List<Book>, Void> search(@RequestParam String query) {
-        return new DataResponse<>(bookService.search(query), null);
+    public DataResponse<List<Book>, Pagination> search(
+            @RequestParam String query,
+            @RequestParam Integer page,
+            @RequestParam Integer size) {
+        return bookService.search(query, page, size);
     }
 }

@@ -1,6 +1,6 @@
 package com.exam.toylocal.domain.user;
 
-import com.exam.toylocal.base.DataResponse;
+import com.exam.toylocal.domain.common.DataResponse;
 import com.exam.toylocal.base.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;

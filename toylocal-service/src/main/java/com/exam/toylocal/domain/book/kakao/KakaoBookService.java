@@ -2,6 +2,8 @@ package com.exam.toylocal.domain.book.kakao;
 
 import com.exam.toylocal.domain.book.Book;
 import com.exam.toylocal.domain.book.BookConverter;
+import com.exam.toylocal.domain.common.DataResponse;
+import com.exam.toylocal.domain.common.Pagination;
 import com.exam.toylocal.utils.JSONUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,11 +40,13 @@ public class KakaoBookService {
     @Autowired
     KakaoProperties kakaoProperties;
 
-    public List<Book> search(String query) {
+    public DataResponse<List<Book>, Pagination> search(String query, Integer page, Integer size) {
         try {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             params.add("query", query);
             params.add("title", "title");
+            params.add("page", String.valueOf(page));
+            params.add("size", String.valueOf(size));
 
             UriComponents uriComponents =
                     UriComponentsBuilder.fromUriString(kakaoProperties.getBookEndpoint())
@@ -63,12 +67,14 @@ public class KakaoBookService {
                     request,
                     String.class);
 
-            return BookConverter.CONVERTER.toBook(bookParser(response.getBody()));
+            List<Book> books = BookConverter.CONVERTER.toBook(bookParser(response.getBody()));
+            Pagination pagination = pageParser(response.getBody());
+            return new DataResponse<>(books, pagination);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return null;
+        return new DataResponse<>(null, null);
     }
 
     private List<KakaoBook> bookParser(String body) {
@@ -86,5 +92,24 @@ public class KakaoBookService {
             log.error("checkSuccess parse error : {}", body);
         }
         return Collections.emptyList();
+    }
+
+    private Pagination pageParser(String body) {
+        if (StringUtils.isEmpty(body)) return Pagination.builder().build();
+
+        try {
+            HashMap ret = JSONUtil.objectMapper().readValue(body, HashMap.class);
+            if (ret.containsKey("meta")) {
+                HashMap meta = (HashMap) ret.get("meta");
+                return Pagination.builder()
+                        .totalCount((Integer) meta.get("total_count"))
+                        .pageCount((Integer) meta.get("pageable_count"))
+                        .isNext(!(Boolean) meta.get("is_end"))
+                        .build();
+            }
+        } catch (IOException e) {
+            log.error("checkSuccess parse error : {}", body);
+        }
+        return Pagination.builder().build();
     }
 }
