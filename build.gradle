@@ -7,12 +7,17 @@ buildscript {
         springSecurityJwtVersion = "1.0.9.RELEASE"
         mysqlConnectorVersion = "8.0.13"
         commonsioVersion = "2.6"
+        mapstructVersion = "1.2.0.Final"
     }
     repositories {
         mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("net.ltgt.gradle:gradle-apt-plugin:0.13")
     }
 }
 
@@ -25,6 +30,7 @@ allprojects {
 
     apply plugin: "java"
     apply plugin: "idea"
+    apply plugin: "net.ltgt.apt"
     apply plugin: "org.springframework.boot"
     apply plugin: "io.spring.dependency-management"
 
@@ -37,6 +43,7 @@ allprojects {
 
     dependencies {
         compileOnly "org.projectlombok:lombok:${lombokVersion}"
+        apt "org.projectlombok:lombok:${lombokVersion}"
         testImplementation "org.springframework.boot:spring-boot-starter-test"
     }
 

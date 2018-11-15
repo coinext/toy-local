@@ -12,12 +12,14 @@ import java.time.ZonedDateTime;
  */
 @Getter
 @NoArgsConstructor
-public class DataResponse<T> {
+public class DataResponse<T, M> {
     private T data;
+    private M meta;
     private Long timestamp;
 
-    public DataResponse(T data) {
+    public DataResponse(T data, M meta) {
         this.data = data;
+        this.meta = meta;
         this.timestamp = ZonedDateTime.now(ZoneOffset.UTC).toInstant().toEpochMilli();
     }
 }

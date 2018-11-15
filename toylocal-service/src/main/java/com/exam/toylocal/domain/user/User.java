@@ -1,7 +1,6 @@
 package com.exam.toylocal.domain.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.time.Instant;
+import java.time.ZonedDateTime;
 
 /**
  * @author hahms
@@ -46,7 +45,7 @@ public class User {
     @CreationTimestamp
     @Getter
     @JsonIgnore
-    private Instant created;       // 생성일자
+    private ZonedDateTime created;       // 생성일자
 
     public User(String email, String password, String name) {
         this.email = email;
