@@ -4,6 +4,7 @@ import com.exam.toylocal.domain.book.Book;
 import com.exam.toylocal.domain.book.BookConverter;
 import com.exam.toylocal.utils.JSONUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -34,8 +35,8 @@ import java.util.stream.Collectors;
 @Slf4j
 public class KakaoBookService {
 
-    private String endpoint = "https://dapi.kakao.com/v3/search/book";
-    private String kakaoToken = "KakaoAK fd4a6d07c15fb742ea94d8ffa2f2493e";
+    @Autowired
+    KakaoProperties kakaoProperties;
 
     public List<Book> search(String query) {
         try {
@@ -44,14 +45,14 @@ public class KakaoBookService {
             params.add("title", "title");
 
             UriComponents uriComponents =
-                    UriComponentsBuilder.fromUriString(endpoint)
+                    UriComponentsBuilder.fromUriString(kakaoProperties.getBookEndpoint())
                             .queryParams(params)
                             .build()
                             .encode();
             URI uri = uriComponents.toUri();
 
             HttpHeaders headers = new HttpHeaders();
-            headers.set(HttpHeaders.AUTHORIZATION, kakaoToken);
+            headers.set(HttpHeaders.AUTHORIZATION, kakaoProperties.getToken());
             headers.setContentType(MediaType.APPLICATION_JSON);
 
             HttpEntity request = new HttpEntity(headers);

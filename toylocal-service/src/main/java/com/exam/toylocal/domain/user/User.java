@@ -45,7 +45,7 @@ public class User {
     @CreationTimestamp
     @Getter
     @JsonIgnore
-    private ZonedDateTime created;       // 생성일자
+    private ZonedDateTime created; // 생성일자
 
     public User(String email, String password, String name) {
         this.email = email;
