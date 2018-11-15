@@ -1,6 +1,7 @@
 package com.exam.toylocal.domain.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,7 +25,7 @@ import java.time.ZonedDateTime;
 @NoArgsConstructor
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     @JsonIgnore
     private Long id;
@@ -33,14 +34,14 @@ public class User {
     private String email;       // 이메일 (로그인 값)
 
     @Column(nullable = false)
-    @JsonIgnore
-//    @Getter(AccessLevel.NONE)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;    // 패스워드
 
     @Column(nullable = false)
     private String name;        // 유저 이름
 
-    private Boolean enabled;
+    @Column(columnDefinition = "bit(1) DEFAULT 1")
+    private Boolean enabled = true;
 
     @CreationTimestamp
     @Getter

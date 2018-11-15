@@ -1,2 +1,2 @@
-INSERT INTO user (id, email, password, name, enabled) VALUES (1, 'user_a@mail.com', '$2a$10$4sbCzppImXHN/2U1/hEhUeSMI3EMjpTm.ebCZLrQmOXautCLjAgJe', '사용자A', 1);
-INSERT INTO user (id, email, password, name, enabled) VALUES (2, 'user_b@mail.com', '$2a$10$4sbCzppImXHN/2U1/hEhUeSMI3EMjpTm.ebCZLrQmOXautCLjAgJe', '사용자B', 1);
+INSERT INTO user (id, email, password, name) VALUES (1, 'user_a@mail.com', '$2a$10$4sbCzppImXHN/2U1/hEhUeSMI3EMjpTm.ebCZLrQmOXautCLjAgJe', '사용자A');
+INSERT INTO user (id, email, password, name) VALUES (2, 'user_b@mail.com', '$2a$10$4sbCzppImXHN/2U1/hEhUeSMI3EMjpTm.ebCZLrQmOXautCLjAgJe', '사용자B');

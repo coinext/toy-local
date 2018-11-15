@@ -1,5 +1,6 @@
 package com.exam.toylocal.domain.common;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -14,6 +15,7 @@ import java.time.ZonedDateTime;
 @NoArgsConstructor
 public class DataResponse<T, M> {
     private T data;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private M meta;
     private Long timestamp;
 

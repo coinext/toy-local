@@ -1,6 +1,7 @@
 package com.exam.toylocal.domain.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -21,5 +22,16 @@ public class UserService {
 
     public Optional<User> getByEmail(String userName) {
         return userRepository.findByEmail(userName);
+    }
+
+    public User regist(User user) {
+        return userRepository.save(encryptUser(user));
+    }
+
+    private User encryptUser(final User user) {
+        if (user.getPassword() != null) {
+            user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        }
+        return user;
     }
 }
