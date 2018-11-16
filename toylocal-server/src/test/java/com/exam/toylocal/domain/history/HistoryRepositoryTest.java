@@ -22,7 +22,7 @@ import java.util.List;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class HistoryServiceTest {
+public class HistoryRepositoryTest {
     @Autowired
     UserRepository userRepository;
 

@@ -37,12 +37,12 @@ public class HistoryController {
             @RequestParam(defaultValue = "0") Integer page,
             @RequestParam(defaultValue = "10") Integer size,
             @RequestParam(defaultValue = "DESC") Sort.Direction direction,
-            @RequestParam(defaultValue = "created") String field,
+            @RequestParam(defaultValue = "created") String sort,
             Principal principal) {
 
         User user = userService.getByEmail(principal.getName())
                 .orElseThrow(UserNotFoundException::new);
 
-        return historyService.gets(user, page, size, new FieldSort(field, direction));
+        return historyService.gets(user, page, size, new FieldSort(sort, direction));
     }
 }
