@@ -19,4 +19,5 @@ public interface HistoryRepository {
     Page<History> findByUser(User user, Pageable pageable);
 
     History save(History history);
+
 }
