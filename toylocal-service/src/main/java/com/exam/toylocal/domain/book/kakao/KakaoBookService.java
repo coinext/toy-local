@@ -103,7 +103,7 @@ public class KakaoBookService {
             if (ret.containsKey("meta")) {
                 HashMap meta = (HashMap) ret.get("meta");
                 return Pagination.builder()
-                        .totalCount((Integer) meta.get("total_count"))
+                        .totalCount(((Integer) meta.get("total_count")).longValue())
                         .pageCount((Integer) meta.get("pageable_count"))
                         .isNext(!(Boolean) meta.get("is_end"))
                         .build();

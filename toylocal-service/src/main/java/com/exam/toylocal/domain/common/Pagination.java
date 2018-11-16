@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 @Builder
 public class Pagination {
-    private Integer totalCount;
+    private Long totalCount;
     private Integer pageCount;
     private Boolean isNext;
 }

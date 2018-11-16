@@ -1,14 +1,13 @@
-package com.exam.toylocal.domain.book;
+package com.exam.toylocal.domain.history;
 
 import com.exam.toylocal.base.exception.UserNotFoundException;
-import com.exam.toylocal.domain.book.kakao.KakaoBookService;
 import com.exam.toylocal.domain.common.DataResponse;
+import com.exam.toylocal.domain.common.FieldSort;
 import com.exam.toylocal.domain.common.Pagination;
-import com.exam.toylocal.domain.history.History;
-import com.exam.toylocal.domain.history.HistoryService;
 import com.exam.toylocal.domain.user.User;
 import com.exam.toylocal.domain.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,15 +19,12 @@ import java.util.List;
 
 /**
  * @author hahms
- * @since 14/11/2018
+ * @since 16/11/2018
  */
 @CrossOrigin
 @RestController
-@RequestMapping("/v1/book")
-public class BookController {
-
-    @Autowired
-    private KakaoBookService bookService;
+@RequestMapping("/v1/history")
+public class HistoryController {
 
     @Autowired
     private UserService userService;
@@ -36,23 +32,17 @@ public class BookController {
     @Autowired
     private HistoryService historyService;
 
-    @GetMapping("/search")
-    public DataResponse<List<Book>, Pagination> search(
-            @RequestParam String query,
-            @RequestParam(defaultValue = "1") Integer page,
+    @GetMapping()
+    public DataResponse<List<History>, Pagination> search(
+            @RequestParam(defaultValue = "0") Integer page,
             @RequestParam(defaultValue = "10") Integer size,
+            @RequestParam(defaultValue = "DESC") Sort.Direction direction,
+            @RequestParam(defaultValue = "created") String field,
             Principal principal) {
 
         User user = userService.getByEmail(principal.getName())
                 .orElseThrow(UserNotFoundException::new);
 
-        // 검색 히스토리 저장
-        History history = new History();
-        history.setUser(user);
-        history.setKeyword(query);
-
-        historyService.add(history);
-
-        return bookService.search(query, page, size);
+        return historyService.gets(user, page, size, new FieldSort(field, direction));
     }
 }
