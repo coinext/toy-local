@@ -9,4 +9,6 @@ dependencies {
 
     compile "mysql:mysql-connector-java:${mysqlConnectorVersion}"
     compile "commons-io:commons-io:${commonsioVersion}"
+
+    testCompile "com.h2database:h2"
 }

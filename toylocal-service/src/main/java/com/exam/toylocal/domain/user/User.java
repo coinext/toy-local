@@ -21,7 +21,7 @@ import java.time.ZonedDateTime;
  */
 @Data
 @Entity
-@Table(name = "user")
+@Table
 @NoArgsConstructor
 public class User {
     @Id
@@ -45,7 +45,6 @@ public class User {
 
     @CreationTimestamp
     @Getter
-    @JsonIgnore
     private ZonedDateTime created; // 생성일자
 
     public User(String email, String password, String name) {

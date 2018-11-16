@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;
+    driver-class-name: org.h2.Driver
+    username: root
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+jwt:
+  publicKey: toylocal.pub
+
+kakao:
+  book-endpoint: https://dapi.kakao.com/v3/search/book
+  token: KakaoAK fd4a6d07c15fb742ea94d8ffa2f2493e

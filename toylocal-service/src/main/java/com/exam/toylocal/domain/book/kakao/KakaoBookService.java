@@ -4,6 +4,7 @@ import com.exam.toylocal.domain.book.Book;
 import com.exam.toylocal.domain.book.BookConverter;
 import com.exam.toylocal.domain.common.DataResponse;
 import com.exam.toylocal.domain.common.Pagination;
+import com.exam.toylocal.domain.user.User;
 import com.exam.toylocal.utils.JSONUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,7 +72,7 @@ public class KakaoBookService {
             Pagination pagination = pageParser(response.getBody());
             return new DataResponse<>(books, pagination);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("kakako search api fail");
         }
 
         return new DataResponse<>(null, null);
@@ -89,7 +90,7 @@ public class KakaoBookService {
                         .collect(Collectors.toList());
             }
         } catch (IOException e) {
-            log.error("checkSuccess parse error : {}", body);
+            log.error("KakaoBook parse error : {}", body);
         }
         return Collections.emptyList();
     }
@@ -108,7 +109,7 @@ public class KakaoBookService {
                         .build();
             }
         } catch (IOException e) {
-            log.error("checkSuccess parse error : {}", body);
+            log.error("Pagination parse error : {}", body);
         }
         return Pagination.builder().build();
     }
