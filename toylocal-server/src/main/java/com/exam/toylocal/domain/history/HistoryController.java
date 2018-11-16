@@ -33,7 +33,7 @@ public class HistoryController {
     private HistoryService historyService;
 
     @GetMapping()
-    public DataResponse<List<History>, Pagination> search(
+    public DataResponse<List<History>, Pagination> getsHistoryList(
             @RequestParam(defaultValue = "0") Integer page,
             @RequestParam(defaultValue = "10") Integer size,
             @RequestParam(defaultValue = "DESC") Sort.Direction direction,

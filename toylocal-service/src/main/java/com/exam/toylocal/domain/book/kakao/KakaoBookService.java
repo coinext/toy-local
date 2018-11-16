@@ -2,9 +2,9 @@ package com.exam.toylocal.domain.book.kakao;
 
 import com.exam.toylocal.domain.book.Book;
 import com.exam.toylocal.domain.book.BookConverter;
+import com.exam.toylocal.domain.book.BookService;
 import com.exam.toylocal.domain.common.DataResponse;
 import com.exam.toylocal.domain.common.Pagination;
-import com.exam.toylocal.domain.user.User;
 import com.exam.toylocal.utils.JSONUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +36,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @Slf4j
-public class KakaoBookService {
+public class KakaoBookService implements BookService {
 
     @Autowired
     KakaoProperties kakaoProperties;

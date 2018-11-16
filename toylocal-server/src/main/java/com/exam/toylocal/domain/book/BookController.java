@@ -1,7 +1,6 @@
 package com.exam.toylocal.domain.book;
 
 import com.exam.toylocal.base.exception.UserNotFoundException;
-import com.exam.toylocal.domain.book.kakao.KakaoBookService;
 import com.exam.toylocal.domain.common.DataResponse;
 import com.exam.toylocal.domain.common.Pagination;
 import com.exam.toylocal.domain.history.History;
@@ -28,7 +27,7 @@ import java.util.List;
 public class BookController {
 
     @Autowired
-    private KakaoBookService bookService;
+    private BookServiceFactory bookServiceFactory;
 
     @Autowired
     private UserService userService;
@@ -38,6 +37,7 @@ public class BookController {
 
     @GetMapping("/search")
     public DataResponse<List<Book>, Pagination> search(
+            @RequestParam BookVendor vendor,
             @RequestParam String query,
             @RequestParam(defaultValue = "1") Integer page,
             @RequestParam(defaultValue = "10") Integer size,
@@ -53,6 +53,7 @@ public class BookController {
 
         historyService.add(history);
 
+        BookService bookService = bookServiceFactory.getService(vendor);
         return bookService.search(query, page, size);
     }
 }

@@ -16,8 +16,7 @@ public interface HistoryRepository {
 
     Optional<History> findById(Long id);
 
-    History save(History history);
-
     Page<History> findByUser(User user, Pageable pageable);
 
+    History save(History history);
 }
