@@ -27,3 +27,4 @@ nbdist/
 .next
 node_modules
 yarn.lockyarn.lock
+package-lock.json

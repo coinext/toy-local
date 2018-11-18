@@ -1,18 +1,33 @@
 import Link from 'next/link'
-import Head from 'next/head';
+import Axios from 'axios';
+import Router from 'next/router'
 import Page from '../layouts/main'
 
-const Index = () => (
-    <Page>
-        <h1>
-            HOME
-        </h1>
-        <h2>
-            <Link href="/about">
-                <a style={{background: 'black', color: 'white'}}>소개</a>
-            </Link>
-        </h2>
-    </Page>
-);
+class Index extends React.Component {
+    static async getInitialProps({ req, res }) {
+        if (!Axios.defaults.headers.common['Authorization']) {
+            if (res) {
+                res.writeHead(302, {
+                    Location: '/login'
+                })
+                res.end()
+            } else {
+                Router.push('/login')
+            }
+        }
+
+        return {}
+    }
+
+    render() {
+        return (
+            <Page>
+                <h1>
+                    HOME
+                </h1>
+            </Page>
+        )
+    }
+}
 
 export default Index;
