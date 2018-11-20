@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author hahms
@@ -24,8 +25,12 @@ public class BookmarkService {
         return bookmarkRepository.save(bookmark);
     }
 
+    public Optional<Bookmark> get(Long bookmarkId) {
+        return bookmarkRepository.findById(bookmarkId);
+    }
+
     public DataResponse<List<Bookmark>, Pagination> gets(User user, Integer page, Integer size, FieldSort sort) {
-        PageRequest pageRequest = PageRequest.of(page, size, sort.getDirection(), sort.getField());
+        PageRequest pageRequest = PageRequest.of(page - 1, size, sort.getDirection(), sort.getField());
         Page<Bookmark> bookmarkPage = bookmarkRepository.findByUser(user, pageRequest);
 
         Pagination pagination = Pagination.builder()
@@ -35,5 +40,9 @@ public class BookmarkService {
                 .build();
 
         return new DataResponse<>(bookmarkPage.getContent(), pagination);
+    }
+
+    public void delete(Long bookmarkId) {
+        bookmarkRepository.deleteById(bookmarkId);
     }
 }

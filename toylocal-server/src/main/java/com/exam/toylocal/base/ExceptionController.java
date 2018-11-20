@@ -1,6 +1,8 @@
 package com.exam.toylocal.base;
 
+import com.exam.toylocal.base.exception.BookmarkNotFoundException;
 import com.exam.toylocal.base.exception.UserNotFoundException;
+import com.exam.toylocal.base.exception.UserNotMatchException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -18,14 +20,18 @@ import java.util.NoSuchElementException;
 @Slf4j
 public class ExceptionController {
 
-    @ExceptionHandler({NoSuchElementException.class, UserNotFoundException.class})
+    @ExceptionHandler({
+            NoSuchElementException.class,
+            UserNotFoundException.class,
+            BookmarkNotFoundException.class
+    })
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponse handleNotFoundException(Exception e) {
         log.error(e.getMessage(), e);
         return ErrorResponse.of(HttpStatus.NOT_FOUND, e.getMessage());
     }
 
-    @ExceptionHandler({IllegalArgumentException.class})
+    @ExceptionHandler({IllegalArgumentException.class, UserNotMatchException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleRequestParameterException(Exception e) {
         log.error(e.getMessage(), e);

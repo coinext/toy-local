@@ -25,7 +25,7 @@ public class HistoryService {
     }
 
     public DataResponse<List<History>, Pagination> gets(User user, Integer page, Integer size, FieldSort sort) {
-        PageRequest pageRequest = PageRequest.of(page, size, sort.getDirection(), sort.getField());
+        PageRequest pageRequest = PageRequest.of(page - 1, size, sort.getDirection(), sort.getField());
         Page<History> historyPage = historyRepository.findByUser(user, pageRequest);
 
         Pagination pagination = Pagination.builder()

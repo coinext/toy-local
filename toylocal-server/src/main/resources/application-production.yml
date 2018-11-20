@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/toylocal?serverTimezone=UTC&autoReconnect=true&useSSL=false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+jwt:
+  publicKey: toylocal.pub
+
+kakao:
+  book-endpoint: https://dapi.kakao.com/v3/search/book
+  token: KakaoAK fd4a6d07c15fb742ea94d8ffa2f2493e

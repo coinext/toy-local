@@ -70,6 +70,7 @@ public class KakaoBookService implements BookService {
 
             List<Book> books = BookConverter.CONVERTER.toBook(bookParser(response.getBody()));
             Pagination pagination = pageParser(response.getBody());
+            pagination.setPageCount(books.size());
             return new DataResponse<>(books, pagination);
         } catch (Exception e) {
             log.error("kakako search api fail");
@@ -102,9 +103,16 @@ public class KakaoBookService implements BookService {
             HashMap ret = JSONUtil.objectMapper().readValue(body, HashMap.class);
             if (ret.containsKey("meta")) {
                 HashMap meta = (HashMap) ret.get("meta");
+
+                // 카카오 책 검색은 검색결과로 제공 가능한 데이터만 보여지며
+                // (total_count는 전체 데이터가 아님)
+                // 1000 이상 검색이 되지 않는다.
+                long totalCount = ((Integer) meta.get("pageable_count")).longValue();
+                totalCount = totalCount > 1000 ? 1000 : totalCount;
+
                 return Pagination.builder()
-                        .totalCount(((Integer) meta.get("total_count")).longValue())
-                        .pageCount((Integer) meta.get("pageable_count"))
+                        .totalCount(totalCount)
+                        .pageCount(0)
                         .isNext(!(Boolean) meta.get("is_end"))
                         .build();
             }
