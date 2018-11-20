@@ -107,6 +107,7 @@ public class HistoryRepositoryTest {
     }
 
     private void orderDateSetup(User user) {
+        historyRepository.deleteAll();
         Arrays.asList("B", "A", "C").forEach(keyword -> {
             History history = new History();
             history.setUser(user);

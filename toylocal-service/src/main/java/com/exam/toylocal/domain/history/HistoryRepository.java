@@ -20,4 +20,6 @@ public interface HistoryRepository {
 
     History save(History history);
 
+    void deleteAll();
+
 }
