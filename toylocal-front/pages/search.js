@@ -23,20 +23,25 @@ export default class Search extends Component {
   }
 
   handleRefresh = () => {
-    const { keyword, column, activePage, size } = this.state
+    const { keyword, activePage, size } = this.state
     const { publicRuntimeConfig } = getConfig()
 
     Axios.get(`${publicRuntimeConfig.serverEndpoint}/v1/book/search?query=${keyword}&page=${activePage}&size=${size}&vendor=kakao`)
       .then(response => {
         this.setState({
           data: response.data.data,
-          column: column,
           totalPages: Math.ceil(response.data.meta.totalCount / size)
         })
       })
       .catch(error => {
         Router.push('/login')
       })
+  }
+
+  handleSearch = () => {
+    this.setState({
+      activePage: 1,
+    }, () => { this.handleRefresh() })
   }
 
   handleBookmark = (title, url, isbn) => {
@@ -78,7 +83,7 @@ export default class Search extends Component {
   }
 
   handleKeyDown = (e, cb) => {
-    if (e.key === 'Enter' && e.shiftKey === false) {
+    if (e.keyCode === 13 && e.shiftKey === false) {
       e.preventDefault();
       cb();
     }
@@ -93,10 +98,10 @@ export default class Search extends Component {
     return (
         <Page>
             <Input
-                icon={<Icon name='search' inverted circular link onClick={this.handleRefresh} />}
+                icon={<Icon name='search' inverted circular link onClick={this.handleSearch} />}
                 placeholder='Search...'
                 onChange={this.handleChange.bind(this, 'keyword')}
-                onKeyDown={(e) => { this.handleKeyDown(e, this.handleRefresh); }} />
+                onKeyDown={(e) => { this.handleKeyDown(e, this.handleSearch); }} />
             <Table sortable celled>
                 <Table.Header>
                     <Table.Row>
@@ -143,7 +148,7 @@ export default class Search extends Component {
             </Table>
             <Pagination
                 onPageChange={this.handlePaginationChange}
-                defaultActivePage={activePage}
+                activePage={activePage}
                 ellipsisItem={{ content: <Icon name='ellipsis horizontal' />, icon: true }}
                 firstItem={{ content: <Icon name='angle double left' />, icon: true }}
                 lastItem={{ content: <Icon name='angle double right' />, icon: true }}

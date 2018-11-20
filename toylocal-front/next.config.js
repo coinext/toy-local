@@ -1,7 +1,7 @@
 const withCSS = require('@zeit/next-css')
 module.exports = withCSS({
   publicRuntimeConfig: {
-    oauthEndpoint: 'http://52.79.128.170:8081',
+    oauthEndpoint: 'http://localhost:8081',
     serverEndpoint: 'http://localhost:8080',
     clientId: 'toylocal-id',
     clientSecret: 'toylocal-secret',
