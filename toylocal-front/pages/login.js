@@ -38,11 +38,11 @@ export default class Login extends Component {
             <Form onSubmit={this.handleSubmit}>
                 <Form.Field>
                     <label>email</label>
-                    <input type="text" ref="email" value="user_a@mail.com" />
+                    <input type="text" ref="email" />
                 </Form.Field>
                 <Form.Field>
                     <label>password</label>
-                    <input type="password" ref="password" value="abc!@#" />
+                    <input type="password" ref="password" />
                 </Form.Field>
                 <Button type='submit'>Submit</Button>
             </Form>
