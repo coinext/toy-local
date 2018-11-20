@@ -47,11 +47,15 @@ public class BookController {
                 .orElseThrow(UserNotFoundException::new);
 
         // 검색 히스토리 저장
-        History history = new History();
-        history.setUser(user);
-        history.setKeyword(query);
+        // page를 변경 할때마다 저장되므로
+        // 히스토리 저장은 프론트에서 비동기로 변경 예정
+        if (page == 1) {
+            History history = new History();
+            history.setUser(user);
+            history.setKeyword(query);
 
-        historyService.add(history);
+            historyService.add(history);
+        }
 
         BookService bookService = bookServiceFactory.getService(vendor);
         return bookService.search(query, page, size);
