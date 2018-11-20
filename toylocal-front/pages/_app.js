@@ -1,9 +1,8 @@
 import App, {Container} from 'next/app'
 import Head from 'next/head'
 import React from 'react'
-import Axios from 'axios';
 
-export default class MyApp extends App {
+export default class ToyLocalApp extends App {
   static async getInitialProps ({ Component, router, ctx }) {
     let pageProps = {}
 

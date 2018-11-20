@@ -1,15 +1,16 @@
+import React, { Component } from 'react'
 import Router from 'next/router'
-import Axios from 'axios';
+import Page from '../layouts/main'
 
-export default class extends React.Component {
-    static async getInitialProps({ req }) {
-        delete Axios.defaults.headers.common['Authorization'];
-        Router.push('/');
+export default class extends Component {
+    componentDidMount() {
+        localStorage.removeItem('token')
+        Router.push('/login')
     }
 
     render() {
         return (
-            <div />
+            <Page />
         )
     }
 }

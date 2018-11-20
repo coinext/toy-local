@@ -13,7 +13,7 @@ export default class MyDocument extends Document {
     return (
      <html>
        <Head>
-         <style>{`body { margin: 0 } /* custom! */`}</style>
+         <style>{`body { margin: 0; background: #f7f7f7 } /* custom! */`}</style>
        </Head>
        <body>
          <Main />

@@ -1,22 +1,12 @@
-import Link from 'next/link'
-import Axios from 'axios';
+import React, { Component } from 'react'
 import Router from 'next/router'
 import Page from '../layouts/main'
 
-class Index extends React.Component {
-    static async getInitialProps({ req, res }) {
-        if (!Axios.defaults.headers.common['Authorization']) {
-            if (res) {
-                res.writeHead(302, {
-                    Location: '/login'
-                })
-                res.end()
-            } else {
-                Router.push('/login')
-            }
+export default class Index extends Component {
+    componentDidMount() {
+        if (!localStorage.getItem('token')) {
+            Router.push('/login')
         }
-
-        return {}
     }
 
     render() {
@@ -29,5 +19,3 @@ class Index extends React.Component {
         )
     }
 }
-
-export default Index;

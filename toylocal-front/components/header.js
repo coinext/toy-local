@@ -1,16 +1,30 @@
-import Link from 'next/link';
+import React, { Component } from 'react'
+import { Menu } from 'semantic-ui-react'
 
-const linkStyle = {
-    marginRight: '1rem'
-}
-const Header = () => {
-    return (
+export default class Header extends Component {
+    render() {
+      return (
         <div>
-            <Link href="/"><a style={linkStyle}>홈</a></Link>
-            <Link prefetch href="/search"><a style={linkStyle}>검색</a></Link>
-            <Link prefetch href="/TableExampleSortable"><a style={linkStyle}>테이블</a></Link>
+          <Menu pointing secondary>
+            <Menu.Item as="a" href="/"
+                name='home'
+            />
+            <Menu.Item as="a" href="/search"
+              name='search'
+            />
+            <Menu.Item as="a" href="/history"
+              name='history'
+            />
+            <Menu.Item as="a" href="/bookmark"
+              name='bookmark'
+            />
+            <Menu.Menu position='right'>
+              <Menu.Item as="a" href="/logout"
+                name='logout'
+              />
+            </Menu.Menu>
+          </Menu>
         </div>
-    );
-};
-
-export default Header;
+      )
+    }
+  }
